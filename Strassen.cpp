@@ -6,26 +6,19 @@
 #include <algorithm>
 #include <cmath>
 
-// Set LEAF_SIZE to 1 if you want to the pure strassen algorithm
-// otherwise, the ikj-algorithm will be applied when the split
-// matrices are as small as LEAF_SIZE x LEAF_SIZE
-int leafsize;
-
 using namespace std;
-
 /*
- * Implementation of the strassen algorithm, similar to 
- * http://en.wikipedia.org/w/index.php?title=Strassen_algorithm&oldid=498910018#Source_code_of_the_Strassen_algorithm_in_C_language
- */
+
+	@author : Ricardo Fragoso
+
+*/
 
 /*Constructors*/
 
 void read(string filename, vector<vector<int>> &A, vector<vector<int>> &B);
 void soma(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int tam);
 void sub(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int tam);
-void divConq(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int n);
-void strassenR(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int tam);
-void strassen(vector< vector<int> > &A, vector< vector<int> > &B, vector< vector<int> > &C, unsigned int tam);
+void strassen(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int tam);
 void matrixsize(string filename);
 void printmatrix(vector< vector<int> > matrix, int n));
 
@@ -74,11 +67,39 @@ void soma(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C
 
 void sub(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int tam){
 	int i, j;
-	for(i = 0; i<tam; i++)
+	for(i = 0; i<tam; i++){
 		for(j = 0; j < tam; j++){
 			C[i][j] = A[i][j] - B[i][j];
+		}
+	}
 }
 
-void divConq(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int n){
+void strassen(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int tam){
+
+	int i, j; // tamanho das linhas e colunas
+
+	for(int k; k > i; k--){
+		for(int l; l > j; l--){
+			C[k][l] = A[k/2][l/2];
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+void matrixsize(vector<vector<int>> &D){
 
 }
