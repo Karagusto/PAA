@@ -114,6 +114,7 @@ void strassen(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>
 		C[0][1] = P3 + P4;
 		C[1][1] = P5 + P1 - P3 - P7;
 }
+}
 void Multmatrix(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C){
 
 }
