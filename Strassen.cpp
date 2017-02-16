@@ -21,6 +21,13 @@ using namespace std;
 /*Constructors*/
 
 void read(string filename, vector<vector<int>> &A, vector<vector<int>> &B);
+void soma(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int tam);
+void sub(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int tam);
+void divConq(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int n);
+void strassenR(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int tam);
+void strassen(vector< vector<int> > &A, vector< vector<int> > &B, vector< vector<int> > &C, unsigned int tam);
+void matrixsize(string filename);
+void printmatrix(vector< vector<int> > matrix, int n));
 
 /*Functions*/
 
@@ -55,4 +62,23 @@ void read(string filename, vector<vector<int>> &A, vector<vector<int>> &B){
 	}
 
 	fclose(matrixfile);
+}
+
+void soma(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int tam){
+	int i, j;
+	for(i = 0; i<tam; i++)
+		for(j = 0; j < tam; j++){
+			C[i][j] = A[i][j] + B[i][j];
+		}
+}
+
+void sub(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int tam){
+	int i, j;
+	for(i = 0; i<tam; i++)
+		for(j = 0; j < tam; j++){
+			C[i][j] = A[i][j] - B[i][j];
+}
+
+void divConq(vector<vector<int>> &A, vector<vector<int>> &B, vector<vector<int>> &C, int n){
+
 }
