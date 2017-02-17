@@ -22,6 +22,10 @@ void multmatrix(vector<vector<int> > &A, vector<vector<int> > &B, vector<vector<
 void sum(vector< vector<int> > &A, vector< vector<int> > &B, vector< vector<int> > &C, int tam);
 void subtract(vector< vector<int> > &A, vector< vector<int> > &B, vector< vector<int> > &C, int tam);
 void printMatrix(vector< vector<int> > matrix, int n);
+void strassenP(vector< vector<int> > &A, 
+              vector< vector<int> > &B, 
+              vector< vector<int> > &C, unsigned int n);
+unsigned int nextPowerOfTwo(int n);
 
 /*Functions*/
 
@@ -71,12 +75,21 @@ void strassen(vector<vector<int> > &A, vector<vector<int> > &B, vector<vector<in
 	else{
 	// dividindo as matrizes em 4 submatrizes
 	int novoTam = tam/2;
-	vector<vector<int> > a11, a12, a21, a22, b11, b12, b21, b22, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, P1, P2, P3, P4, P5, P6, P7, c11, c12, c21, c22, c11result, c11result2, c22result, c22result2;
-
+	vector<int> inner (novoTam);
+	vector<vector<int> > a11(novoTam, inner), a12(novoTam, inner), a21(novoTam, inner), a22(novoTam, inner), b11(novoTam, inner), b12(novoTam, inner), 
+	b21(novoTam, inner), b22(novoTam, inner), S1(novoTam, inner), S2(novoTam, inner), S3(novoTam, inner), S4(novoTam, inner), S5(novoTam, inner), 
+	S6(novoTam, inner), S7(novoTam, inner), S8(novoTam, inner), S9(novoTam, inner), S10(novoTam, inner), P1(novoTam, inner), P2(novoTam, inner), 
+	P3(novoTam, inner), P4(novoTam, inner), P5(novoTam, inner), P6(novoTam, inner), P7(novoTam, inner), c11(novoTam, inner), c12(novoTam, inner), 
+	c21(novoTam, inner), c22(novoTam, inner), c11result(novoTam, inner), c11result2(novoTam, inner), c22result(novoTam, inner), c22result2(novoTam, inner);
+/*
+	vector<vector<int> > a11(novoTam), a12(novoTam), a21(novoTam), a22(novoTam), b11(novoTam), b12(novoTam), b21(novoTam), b22(novoTam), S1(novoTam), S2(novoTam), S3(novoTam), S4(novoTam), S5(novoTam), S6(novoTam), S7(novoTam), S8(novoTam), 
+	S9(novoTam), S10(novoTam), P1(novoTam), P2(novoTam), P3(novoTam), P4(novoTam), P5(novoTam), P6(novoTam), P7(novoTam), c11(novoTam), c12(novoTam), 
+	c21(novoTam), c22(novoTam), c11result(novoTam), c11result2(novoTam), c22result(novoTam), c22result2(novoTam);
+	*/
 	int i, j;
 	
 		for(i = 0; i < novoTam; i++){
-			for(j = 0; j <novoTam; j++){
+			for(j = 0; j < novoTam; j++){
 				a11[i][j] = A[i][j];
 				a12[i][j] = A[i][j + novoTam];
 				a21[i][j] = A[i + novoTam][j];
@@ -95,7 +108,7 @@ void strassen(vector<vector<int> > &A, vector<vector<int> > &B, vector<vector<in
 		sum(a11, a12, S2, novoTam);
 		sum(a21, a22, S3, novoTam);
 		subtract(b21, b11, S4, novoTam);
-		sum(a11, b11, S4, novoTam);
+		sum(a11, b11, S5, novoTam);
 		sum(b11, b22, S6, novoTam);
 		subtract(a12, a22, S7, novoTam);
 		sum(b21, b22, S8, novoTam);
@@ -140,6 +153,9 @@ void strassen(vector<vector<int> > &A, vector<vector<int> > &B, vector<vector<in
         }
 		
 }
+}
+unsigned int nextPowerOfTwo(int n) {
+    return pow(2, int(ceil(log2(n))));
 }
 void multmatrix(vector<vector<int> > &A, vector<vector<int> > &B, vector<vector<int> > &C, int n){
     
@@ -197,7 +213,9 @@ string filename;
 
     
     int n = 512;
-    vector< vector<int> > A, B, C;
+    vector<int> inner (n);
+    vector< vector<int> > A(n, inner), B(n, inner), C(n, inner);
+    //vector< vector<int> > A(n), B(n), C(n);
     read (filename, A, B);
     strassen(A, B, C, n);
 
@@ -206,6 +224,30 @@ string filename;
     return 0;
 
 }
+
+void strassenP(vector< vector<int> > &A, 
+              vector< vector<int> > &B, 
+              vector< vector<int> > &C, unsigned int n) {
+    //unsigned int n = tam;
+    unsigned int m = nextPowerOfTwo(n);
+    vector<int> inner(m);
+    vector< vector<int> > APrep(m, inner), BPrep(m, inner), CPrep(m, inner);
+
+    for(unsigned int i=0; i<n; i++) {
+        for (unsigned int j=0; j<n; j++) {
+            APrep[i][j] = A[i][j];
+            BPrep[i][j] = B[i][j];
+        }
+    }
+
+    strassen(APrep, BPrep, CPrep, m);
+    for(unsigned int i=0; i<n; i++) {
+        for (unsigned int j=0; j<n; j++) {
+            C[i][j] = CPrep[i][j];
+        }
+    }
+}
+
 /*int getMatrixSize(string filename) {
     string line;
     ifstream infile;
