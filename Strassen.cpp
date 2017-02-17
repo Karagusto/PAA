@@ -22,10 +22,6 @@ void multmatrix(vector<vector<int> > &A, vector<vector<int> > &B, vector<vector<
 void sum(vector< vector<int> > &A, vector< vector<int> > &B, vector< vector<int> > &C, int tam);
 void subtract(vector< vector<int> > &A, vector< vector<int> > &B, vector< vector<int> > &C, int tam);
 void printMatrix(vector< vector<int> > matrix, int n);
-void strassenP(vector< vector<int> > &A, 
-              vector< vector<int> > &B, 
-              vector< vector<int> > &C, unsigned int n);
-unsigned int nextPowerOfTwo(int n);
 
 /*Functions*/
 
@@ -108,7 +104,7 @@ void strassen(vector<vector<int> > &A, vector<vector<int> > &B, vector<vector<in
 		sum(a11, a12, S2, novoTam);
 		sum(a21, a22, S3, novoTam);
 		subtract(b21, b11, S4, novoTam);
-		sum(a11, b11, S5, novoTam);
+		sum(a11, a22, S5, novoTam);
 		sum(b11, b22, S6, novoTam);
 		subtract(a12, a22, S7, novoTam);
 		sum(b21, b22, S8, novoTam);
@@ -154,9 +150,7 @@ void strassen(vector<vector<int> > &A, vector<vector<int> > &B, vector<vector<in
 		
 }
 }
-unsigned int nextPowerOfTwo(int n) {
-    return pow(2, int(ceil(log2(n))));
-}
+
 void multmatrix(vector<vector<int> > &A, vector<vector<int> > &B, vector<vector<int> > &C, int n){
     
     for (int i = 0; i < n; i++) {
@@ -225,28 +219,6 @@ string filename;
 
 }
 
-void strassenP(vector< vector<int> > &A, 
-              vector< vector<int> > &B, 
-              vector< vector<int> > &C, unsigned int n) {
-    //unsigned int n = tam;
-    unsigned int m = nextPowerOfTwo(n);
-    vector<int> inner(m);
-    vector< vector<int> > APrep(m, inner), BPrep(m, inner), CPrep(m, inner);
-
-    for(unsigned int i=0; i<n; i++) {
-        for (unsigned int j=0; j<n; j++) {
-            APrep[i][j] = A[i][j];
-            BPrep[i][j] = B[i][j];
-        }
-    }
-
-    strassen(APrep, BPrep, CPrep, m);
-    for(unsigned int i=0; i<n; i++) {
-        for (unsigned int j=0; j<n; j++) {
-            C[i][j] = CPrep[i][j];
-        }
-    }
-}
 
 /*int getMatrixSize(string filename) {
     string line;
