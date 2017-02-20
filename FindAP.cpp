@@ -29,7 +29,7 @@ void findAP(vector<int> &A, int tam){
 
 	//razão da PA
 	int r = (A[tam] - A[0])/tam;
-	int missing = 0;
+	//int missing = 0;
 
 
 	if (tam > 2)
@@ -46,13 +46,17 @@ void findAP(vector<int> &A, int tam){
 	}
 	else{
 		r2 = A[1] - A[0];
-		if (r2 == r)
+		if (r2 != r)
 		{
-			return true;
-		}
-		else{
-			return false
-			missing = A[0] + r;
+			cout <<  A[0] + r;
 		}
 	}
 }
+
+int main (int argc, char* argv[]) {
+    
+    return 0;
+
+
+}
+
