@@ -58,6 +58,7 @@ void findAP(vector<int> &A, int tam){
 }
 
 int main (int argc, char* argv[]) {
+<<<<<<< HEAD
     
     int N, T;
     vector<int> A(N);
@@ -75,6 +76,20 @@ int main (int argc, char* argv[]) {
     	//cout << A[i] ;
 		}*/
 
+=======
+    vector<int> A;
+    int N, T;
+    cout << "tá entrando\n";
+    cin >> T;
+    while(T > 0){
+    	cin >> N;
+    	while(N > 0){
+    		for(int i = 0; i < N; ++i){
+    			cin >> A[i]; 
+    		}
+    		N--;
+    	}
+>>>>>>> 1003c3932531a7b42bff80c45cb92ca6d1177c46
     	findAP(A,N);
     	T--;
     }
