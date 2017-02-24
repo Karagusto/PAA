@@ -29,12 +29,14 @@ void findAP(vector<int> &A, int tam){
 
 	//razão da PA
 	int r = (A[tam] - A[0])/tam;
+	
 	//int missing = 0;
 
 
 	if (tam > 2)
 	{
 		int novoTam = tam/2;
+		vector<int> A2(novoTam), A3(novoTam);
 		for (int i = 0; i < novoTam; ++i){
 			A2[i] = A[i];
 		}
@@ -45,18 +47,38 @@ void findAP(vector<int> &A, int tam){
 		findAP(A3,novoTam);
 	}
 	else{
-		r2 = A[1] - A[0];
+		int r2 = A[1] - A[0];
 		if (r2 != r)
 		{
-			cout <<  A[0] + r;
+			cout <<  A[0] + r << endl;
+		}else{
+			cout << "não tem erro!" << endl;
 		}
 	}
 }
 
 int main (int argc, char* argv[]) {
     
+    int N, T;
+    vector<int> A(N);
+    //cout << "tá entrando" << endl;
+    cin >> T;
+    while(T > 0){
+    	cout << "entrouT" << endl;
+    	cin >> N;
+    
+    		for(int i = 0; i <= N; ++i){
+    			cout << "entrouN" << endl;
+    			cin >> A[i]; 
+    		}
+    	/*for(int i = 0; i<N; ++i){
+    	//cout << A[i] ;
+		}*/
+
+    	findAP(A,N);
+    	T--;
+    }
     return 0;
 
 
 }
-
